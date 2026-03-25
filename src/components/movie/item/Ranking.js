@@ -1,0 +1,28 @@
+"use client"
+
+import {memo} from "react";
+import MovieImagesPoster from "@/components/movie/images/Poster";
+import Link from "next/link";
+import {movieDetailUrl} from "@/utils/url";
+
+const MovieItemRanking = ({item}) => {
+  return (
+    <div className="item">
+      <div className="pos">{item.current_rank}.</div>
+      {item.direction === "up" &&
+        <div className="dev dev-up"><i className="fa-solid fa-arrow-trend-up"></i></div>}
+      {item.direction === "down" &&
+        <div className="dev dev-down"><i className="fa-solid fa-arrow-trend-down"></i></div>}
+      {item.direction === "same" &&
+        <div className="dev dev-stand"><i className="fa-solid fa-minus"></i></div>}
+      <div className="v-thumbnail">
+        <MovieImagesPoster movie={item}/>
+      </div>
+      <h4 className="name lim-1">
+        <Link href={movieDetailUrl(item)} title={item.title}>{item.title}</Link>
+      </h4>
+    </div>
+  )
+}
+
+export default memo(MovieItemRanking)
